@@ -1,5 +1,6 @@
 import axios from 'axios';
 import LocalStorageService from '../utils/local-storage';
+
 // refresh token
 const refreshToken = async (retries) => {
   return new Promise((resolve, reject) => {

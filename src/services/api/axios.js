@@ -5,6 +5,7 @@ import { BASE_API_URL, LANGUAGE_DEFAULT } from '@src/configs';
 import LocalStorageService from '../utils/local-storage';
 import { redirectToLogin } from '../utils/navigate';
 import { refreshToken, setToken, clearToken } from './auth';
+import { ERROR_CODES } from '../constants/request';
 
 // ----------------------------------------------------
 const axiosInstance = axios.create({
@@ -35,7 +36,7 @@ const requestHandler = (request) => {
 let refreshing = null;
 const responseErrorHandler = async (axiosError) => {
   const originalConfig = axiosError.config;
-  if (axiosError.response?.status === 401) {
+  if (axiosError.response?.status === ERROR_CODES.invalidToken) {
     try {
       refreshing = refreshing || refreshToken(2);
       console.log('call refresh Token');
